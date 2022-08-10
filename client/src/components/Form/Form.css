@@ -1,0 +1,12 @@
+.form-input {
+    margin-left: 30px;
+    padding: 1rem;
+}
+
+.ip-p2-hidden {
+    display: none;
+}
+
+.ip-p2-show {
+    display: block;
+}

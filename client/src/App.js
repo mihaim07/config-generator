@@ -7,7 +7,7 @@ import Utilities from './components/Utilities/Utilities';
 function App() {
   return (
     <div className="App">
-        <p class="title"> Config generator </p>
+        <p className="title"> Config generator </p>
         <Form></Form>
         <Output></Output>
         <Utilities></Utilities>
