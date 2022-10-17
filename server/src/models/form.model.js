@@ -3,21 +3,24 @@ const path = require('path');
 
 fs.copyFileSync(path.join(__dirname, 'config.cfg'), path.join(__dirname, 'configModified.cfg'))
 
-const fileContent = fs.readFileSync(path.join(__dirname, 'configModified.cfg'), 'utf8', (err, data) => {
+var fileContent = fs.readFileSync(path.join(__dirname, 'configModified.cfg'), 'utf8', (err, dat) => {
     if (err) {
-        console.log(err);
+        console.log('Error1: ', err);
         return
     }
-    return data;
+    return dat;
 })
 
-function replaceData(word) {
-    var newContent = fileContent.replace(/software/g, word);
-    fs.writeFileSync(path.join(__dirname, 'configModified.cfg'), newContent, 'utf-8', err => {
-        if (err) {
-            console.log(err);
-            return
-        }
+
+function replaceData(objParamas) {
+    Object.entries(objParamas).forEach(param => {
+        fileContent = fileContent.replace('{' + param[0] + '}', param[1])
+        fs.writeFileSync(path.join(__dirname, 'configModified.cfg'), fileContent, 'utf-8', err => {
+            if (err) {
+                console.log(err);
+                return
+            }
+        })
     })
 }
 
