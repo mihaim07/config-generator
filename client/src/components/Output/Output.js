@@ -3,25 +3,25 @@ import './Output.css';
 var API_URL = 'localhost:8000';
 
 
-async function onClickSubmit() {
-    try {
-        return await fetch(`http://${API_URL}/data`);
-        // const result = await response.json()
-        // console.log(result);
-        // return result;
-    } catch (err) {
-        console.log(err);
-    }
-
+function onClickSubmit() {
+        fetch(`http://${API_URL}/data`)
+        .then(response => {
+            // response.blob()
+            //     .then(blob => {
+            //     let url = window.URL.createObjectURL(blob);
+            //     let a = document.createElement('a');
+            //     a.href = url;
+            //     a.download = 'config.cfg';
+            //     a.click();
+            // });
+            window.location.href = response.url;
+    });
 }
 
 const Output = () => {
     return (
         <div className='getConfig'>
-            <button type='submit' onClick={onClickSubmit}>Get config files</button>
-            <div>
-                <span><a href="config.cfg" target="_blank" download>config.cfg</a></span>
-            </div>
+            <button onClick={() => onClickSubmit()}>Get config files</button>
         </div>
     )
 }

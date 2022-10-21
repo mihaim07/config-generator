@@ -1,3 +1,8 @@
-const data = [1,2,3];
+const path = require('path');
 
-module.exports = data;
+pathToFile = path.join(__dirname);
+
+console.log('path: ', pathToFile)
+
+
+module.exports = pathToFile;

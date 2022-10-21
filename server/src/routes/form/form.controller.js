@@ -1,9 +1,8 @@
-const replaceData = require('../../models/form.model');
-
+const {replaceData} = require('../../models/form.model');
 
 
 function postForm(req, res) {
-    console.log(req.body);
+    console.log('req.body', req.body);
     let networkParams = {
         ipAdd1: req.body.ipAdd1,
         ipAdd2: req.body.ipAdd2,
@@ -15,8 +14,7 @@ function postForm(req, res) {
         broadcast2: req.body.broadcast2,
         name: req.body.name,
     }
-    const aaa = replaceData(networkParams)
-    console.log(aaa)
+    replaceData(networkParams)
     return res.status(200).json("Test ok");
 }
 
