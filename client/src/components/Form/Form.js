@@ -14,7 +14,7 @@ function Display(props) {
                     <input className="ip-input" type="text" placeholder="Enter IP address" onChange={ (e) => props.onChangeIp2(e)}></input>
                     <span>
                         <label htmlFor="mask"> Mask </label>
-                        <select name="mask" id='mask' onChange={ (e) => props.onChangeMask2(e)}>
+                        <select name="mask" id='mask' onChange={ (e) => { props.onChangeMask2(e); props.calculateExtendedMask(e)}} >
                             <option value="/30">/30</option>
                             <option value="/29">/29</option>
                             <option value="/28">/28</option>
@@ -35,8 +35,10 @@ const Form = () => {
     const [mask1, setMask1] = useState("");
     const [ipAdd2, setIpAdd2] = useState("");
     const [mask2, setMask2] = useState("");
-    const [name, setName] = useState("")
+    const [name, setName] = useState("");
     const [display2, setDisplay2] = useState(true);
+    const [maskEx1, setMaskEx1] = useState("255.255.255.248");
+    const [maskEx2, setMaskEx2] = useState("255.255.255.240");
     
     useEffect(() => {
         if (type === '4') {
@@ -45,7 +47,7 @@ const Form = () => {
         } else {
             setDisplay2(true);
         }
-    }, [type]);
+    }, [type, maskEx2]);
 
     
     function maskExtend(mask) {
@@ -65,8 +67,8 @@ const Form = () => {
         }
     }
     
-    const maskExtended1 = maskExtend(mask1);
-    const maskExtended2 = maskExtend(mask2);
+    var maskExtended1 = maskExtend(mask1);
+    var maskExtended2 = maskExtend(mask2);
     
     var gw1 = "";
     var gw2 = "";
@@ -104,7 +106,9 @@ const Form = () => {
     function setMsk2 (e) {
         setMask2(e.target.value)
     }
-
+    function setMskEx2 (e) {
+        setMaskEx2(maskExtend(e.target.value));
+    }
     
     async function onClickSubmit() {
         try {
@@ -114,7 +118,7 @@ const Form = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    ipAdd1, ipAdd2, gw1, gw2, netw1, netw2, broadcast1, broadcast2, name
+                    ipAdd1, maskEx1, ipAdd2, maskEx2, gw1, gw2, netw1, netw2, broadcast1, broadcast2, name
                 }),            
             });
             // const result = await response.json()
@@ -161,7 +165,7 @@ const Form = () => {
                 <input className="ip-input" type="text" placeholder="Enter IP address" onChange={ e => setIpAdd1(e.target.value)}></input>
                 <span>
                     <label htmlFor="mask"> Mask </label>
-                    <select name="mask" id='mask' onChange={ e => setMask1(e.target.value)}>
+                    <select name="mask" id='mask' onChange={ e => {setMask1(e.target.value); setMaskEx1(maskExtend(e.target.value))}}>
                         <option value="/30">/30</option>
                         <option value="/29">/29</option>
                         <option value="/28">/28</option>
@@ -170,7 +174,7 @@ const Form = () => {
                     </select>
                 </span>
             </div>
-            <Display isType4={display2} onChangeIp2={setIp2} onChangeMask2={setMsk2}/>
+            <Display isType4={display2} onChangeIp2={setIp2} onChangeMask2={setMsk2} calculateExtendedMask={setMskEx2}/>
             <div>
                 <span>Name </span>    
                 <input type="text" className="name-input" placeholder="Enter name" onChange={ e => setName(e.target.value)}></input>

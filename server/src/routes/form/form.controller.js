@@ -5,7 +5,9 @@ function postForm(req, res) {
     console.log('req.body', req.body);
     let networkParams = {
         ipAdd1: req.body.ipAdd1,
+        maskExtended1: req.body.maskEx1,
         ipAdd2: req.body.ipAdd2,
+        maskExtended2: req.body.maskEx2,
         gw1: req.body.gw1,
         gw2: req.body.gw2, 
         netw1: req.body.netw1,
