@@ -179,7 +179,7 @@ const Form = () => {
                 <span>Name </span>    
                 <input type="text" className="name-input" placeholder="Enter name" onChange={ e => setName(e.target.value)}></input>
             </div>
-            <button type='submit' onClick={onClickSubmit}>Submit</button>
+            <button id="submit-form" type='submit' onClick={onClickSubmit}>Submit</button>
         </div>   
     );
 }

@@ -2,3 +2,21 @@
     margin-left: 30px;
     padding: 1rem;
 }
+
+#get, #get1, #get2, #getAll {
+    margin: 0.5%;
+    box-shadow: 2px 2px #888888;
+}
+
+#get:active, #get1:active, #get2:active, #getAll:active {
+    border: 0;
+    box-shadow: none;
+    transform: translateX(1px) translateY(1px);
+}
+
+#get:hover, #get1:hover, #get2:hover, #getAll:hover {
+    background-color:#d0d0d0;
+    border: 1px solid black;
+    border-radius: 2px 2px;
+    padding: 1px 6px;
+}
